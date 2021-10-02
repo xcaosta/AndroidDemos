@@ -1,0 +1,22 @@
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+LOCAL_MODULE := main.aexe
+
+LOCAL_C_INCLUDES += \
+	.
+
+#LOCAL_CFLAGS += -I<path>
+#LOCAL_CPPFLAGS
+
+	
+LOCAL_SRC_FILES := \
+	main.cpp
+
+#LOCAL_STATIC_LIBRARIES
+#LOCAL_SHARED_LIBRARIES
+#LOCAL_LDLIBS := -lz
+
+
+include $(BUILD_EXECUTABLE)
+#include $(BUILD_SHARED_LIBRARY)
+#include $(BUILD_STATIC_LIBRARY)
