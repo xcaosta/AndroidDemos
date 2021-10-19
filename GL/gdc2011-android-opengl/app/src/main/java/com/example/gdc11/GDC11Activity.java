@@ -37,7 +37,7 @@ public class GDC11Activity extends Activity {
     // Tweakables.
     private static final boolean kUseMipmaps = true;
     private static final boolean kUseCompressedTextures = true;
-    private static final boolean kUseMultisampling = false;
+    private static final boolean kUseMultisampling = true;
 
     // If |kUseMultisampling| is set, this is what chose the multisampling config.
     private MultisampleConfigChooser mConfigChooser;

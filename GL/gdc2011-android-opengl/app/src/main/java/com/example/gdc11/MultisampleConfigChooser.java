@@ -4,6 +4,8 @@ import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
 
+import android.opengl.EGL14;
+import android.opengl.EGLExt;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
@@ -20,14 +22,17 @@ public class MultisampleConfigChooser implements GLSurfaceView.EGLConfigChooser 
 
         // Try to find a normal multisample configuration first.
         int[] configSpec = {
-                EGL10.EGL_RED_SIZE, 5,
-                EGL10.EGL_GREEN_SIZE, 6,
-                EGL10.EGL_BLUE_SIZE, 5,
-                EGL10.EGL_DEPTH_SIZE, 16,
-                // Requires that setEGLContextClientVersion(2) is called on the view.
-                EGL10.EGL_RENDERABLE_TYPE, 4 /* EGL_OPENGL_ES2_BIT */,
-                EGL10.EGL_SAMPLE_BUFFERS, 1 /* true */,
-                EGL10.EGL_SAMPLES, 2,
+                EGL14.EGL_RED_SIZE, 8,
+                EGL14.EGL_GREEN_SIZE, 8,
+                EGL14.EGL_BLUE_SIZE, 8,
+                EGL14.EGL_ALPHA_SIZE, 8,
+                EGL14.EGL_RENDERABLE_TYPE, EGL14.EGL_OPENGL_ES2_BIT,
+                EGL14.EGL_SURFACE_TYPE, EGL14.EGL_PBUFFER_BIT | EGL14.EGL_WINDOW_BIT,
+                EGL14.EGL_SAMPLE_BUFFERS, 1 /* true */,
+                EGL14.EGL_SAMPLES, 4,
+                EGLExt.EGL_RECORDABLE_ANDROID, 1, // EGL_RECORDABLE_ANDROID
+                EGL14.EGL_DEPTH_SIZE, 16,
+
                 EGL10.EGL_NONE
         };
 
@@ -98,7 +103,7 @@ public class MultisampleConfigChooser implements GLSurfaceView.EGLConfigChooser 
         // first: Even though we asked for rgb565 configurations, rgb888
         // configurations are considered to be "better" and returned first.
         // You need to explicitly filter the data returned by eglChooseConfig!
-        int index = -1;
+        /*int index = -1;
         for (int i = 0; i < configs.length; ++i) {
             if (findConfigAttrib(egl, display, configs[i], EGL10.EGL_RED_SIZE, 0) == 5) {
                 index = i;
@@ -111,8 +116,8 @@ public class MultisampleConfigChooser implements GLSurfaceView.EGLConfigChooser 
         EGLConfig config = configs.length > 0 ? configs[index] : null;
         if (config == null) {
             throw new IllegalArgumentException("No config chosen");
-        }
-        return config;
+        }*/
+        return configs[0];
     }
 
     private int findConfigAttrib(EGL10 egl, EGLDisplay display,
