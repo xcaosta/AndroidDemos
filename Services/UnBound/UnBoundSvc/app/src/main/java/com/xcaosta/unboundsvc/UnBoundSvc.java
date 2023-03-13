@@ -57,7 +57,7 @@ public class UnBoundSvc extends Service {
                     final int nn = n;
                     handler.post(()->showMessage("Service Live: " + nn));
                 } catch (Exception e) {
-                    handler.post(()->showMessage("Service Interrupted"));
+                    handler.post(()->showMessage("Service caught exception: " + e + ":" + e.getMessage()));
                     break;
                 }
             }
